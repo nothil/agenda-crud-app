@@ -1,0 +1,14 @@
+@import "./scss/root";
+
+body {
+  font-family: "Poppins", sans-serif !important;
+  background-color: #fafafe;
+  font-size: 18px;
+  color: var(--darkNavy);
+  font-weight: 400;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

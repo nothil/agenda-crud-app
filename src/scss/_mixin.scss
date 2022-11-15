@@ -1,0 +1,60 @@
+$large: 992px;
+$medium: 768px;
+$small: 576px;
+$laptop: 1450px;
+$tablet: 964px;
+@mixin lg-screen {
+	@media screen and (min-width: $large) {
+		@content;
+	}
+}
+
+@mixin md-screen {
+	@media screen and (min-width: $medium) {
+		@content;
+	}
+}
+
+@mixin sm-screen {
+	@media screen and (min-width: $small) {
+		@content;
+	}
+}
+@mixin md-mobile {
+	@media (min-width: $small) and (max-width: 628px) {
+		@content;
+	}
+}
+@mixin mobile-view {
+	@media screen and (max-width: $medium) {
+		@content;
+	}
+}
+@mixin mobile {
+	@media screen and (max-width: $small) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: 628px) and (max-width: $large) {
+		@content;
+	}
+}
+
+@mixin laptop-view {
+	@media (min-width: 992px) and (max-width: $laptop) {
+		@content;
+	}
+}
+
+@mixin new-mobile {
+	@media screen and (max-width: $tablet) {
+		@content;
+	}
+}
+
+@mixin customPlaceholder {
+	color: var(--darkGrey);
+	opacity: 0.5;
+}
