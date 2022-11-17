@@ -11,7 +11,7 @@ const Header = () => {
           <i className="fas  fa-briefcase" />
         </div>
         <BrowserRouter>
-          <Link to="/">
+          <Link to="/home">
             <div className="name">AGENDA DETAILS</div>
           </Link>
         </BrowserRouter>

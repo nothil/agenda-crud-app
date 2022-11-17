@@ -1,9 +1,9 @@
-# Getting Started with Create React App
+### Getting Started with Create React App
 
-### `npm install`
+# `npm install`
 
-### `npm start`
+# `npm start`
 
-### Run Local Server open new terminal and run
+## Run local Server open new terminal and run below command
 
-### `npx json-server --watch Data/db.json --port 5000`
+# `npx json-server --watch Data/db.json --port 5000`
