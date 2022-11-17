@@ -1,16 +1,16 @@
-import React from "react";
-// import "antd/dist/antd.css";
-import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import React, { useEffect } from "react";
 import format from "date-fns/format";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import enUS from "date-fns/locale/en-US";
+import Data from "../Helpers/DammyEvents";
+import GetData from "../Helpers/Events";
 
-import Modal from "../Modal/Modal";
-// import "react-big-calendar/lib/css/react-big-calendar.css";
+import { ShowEventsApi, ShowEventApi, closeEvent } from "../Helpers/Events";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
-// import moment from "moment";
 import "./Calendar.scss";
 
 const locales = {
@@ -24,25 +24,57 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
+// function EventAgenda({ event }) {
+//   return (
+//     <span>
+//       <em style={{ color: "magenta" }}>{event.title}</em>
+//       <p>{event.desc}</p>
+//     </span>
+//   );
+// }
+
+// const CustomToolbar = (toolbar) => {
+//   const goAgenda = () => {
+//     toolbar.onNavigate("agenda");
+//   };
+// };
+
 const Calendars = ({ events, showEventsApi }) => {
   const [openModal, setOpenModal] = React.useState(false);
+  const [data, setData] = React.useState({});
 
-  const handleCancel = () => {
+  // customazition of the calendar
+
+  const handleOpen = (event) => {
+    setOpenModal(true);
+    if (event.id) {
+      ShowEventApi(event.id);
+    }
+  };
+
+  useEffect(() => {
+    GetData(setData);
+    console.log("i renderd because of refresh or start");
+  }, []);
+
+  const handleClose = () => {
     setOpenModal(false);
+    closeEvent();
   };
 
   return (
     <div className="calendar">
-      <Modal
+      {/* <Modals
         open={openModal}
-        onClose={handleCancel}
-        // showEventsApi={showEventsApi}
-      ></Modal>
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+      ></Modals> */}
       <Calendar
         localizer={localizer}
         startAccessor="start"
         endAccessor="end"
-        // style={{ height: 300, margin: 200, fontFamily: "Patrick Hand" }}
+        events={Data}
+        onSelectEvent={handleOpen}
       />
     </div>
   );

@@ -1,0 +1,32 @@
+@import "react-big-calendar/lib/sass/styles";
+
+form {
+  padding: 4em;
+  padding-left: 28em;
+
+  .mb-4 {
+    .form-label {
+      padding: 14px;
+    }
+  }
+
+  .form-control {
+    display: grid;
+
+    padding: 8px;
+    width: 345px;
+  }
+  p {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  Button {
+    background: darkgrey;
+    width: 34%;
+    font-weight: 600;
+    padding: 1em 1em;
+    border-radius: 22px;
+    align-self: center;
+    margin-top: 23px;
+  }
+}

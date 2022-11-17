@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, BrowserRouter } from "react-router-dom";
 import "./header.scss";
 
 const Header = () => {
@@ -9,7 +10,11 @@ const Header = () => {
         <div className="icon">
           <i className="fas  fa-briefcase" />
         </div>
-        <div className="name">AGENDA DETAILS</div>
+        <BrowserRouter>
+          <Link to="/">
+            <div className="name">AGENDA DETAILS</div>
+          </Link>
+        </BrowserRouter>
       </div>
       {/* <div className="brand-center">
         <div className="icon">
