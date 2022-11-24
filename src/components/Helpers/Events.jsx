@@ -152,29 +152,6 @@ const updateEventApi = (values, id) => async (dispatch) => {
     }
   }
 };
-//     console.log(result);
-//     const response = result.data;
-//     dispatch(removeError());
-//     return "response was successful";
-//   } catch (err) {
-//     console.log(err);
-//     dispatch(addError(err.response.data));
-//   }
-
-//    .then(res=>{
-//        console.log(res)
-//     if(res && res.data){
-
-//         console.log(res.data)
-//
-//         return;
-//     }else{
-//         if(res.response.data){
-//             console.log(res.response.data)
-//         }
-//     }
-//    })
-// };
 
 export const closeEvent = () => {
   console.log("you closed the event and removed event state");
