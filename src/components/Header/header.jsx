@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, BrowserRouter } from "react-router-dom";
+// import { Link, BrowserRouter, useNavigate } from "react-router-dom";
 import "./header.scss";
 
 const Header = () => {
@@ -10,11 +10,8 @@ const Header = () => {
         <div className="icon">
           <i className="fas  fa-briefcase" />
         </div>
-        <BrowserRouter>
-          <Link to="/home">
-            <div className="name">AGENDA DETAILS</div>
-          </Link>
-        </BrowserRouter>
+
+        <div className="name">AGENDA DETAILS</div>
       </div>
       {/* <div className="brand-center">
         <div className="icon">

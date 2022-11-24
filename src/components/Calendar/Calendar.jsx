@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import format from "date-fns/format";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import parse from "date-fns/parse";
@@ -7,6 +7,7 @@ import getDay from "date-fns/getDay";
 import enUS from "date-fns/locale/en-US";
 import Data from "../Helpers/DammyEvents";
 import GetData from "../Helpers/Events";
+import { Modals } from "../Modal/Modal";
 
 import { ShowEventsApi, ShowEventApi, closeEvent } from "../Helpers/Events";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -40,9 +41,10 @@ const localizer = dateFnsLocalizer({
 // };
 
 const Calendars = ({ events, showEventsApi }) => {
-  const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [data, setData] = React.useState({});
 
+  // const history = useHistory();
   // customazition of the calendar
 
   const handleOpen = (event) => {
@@ -57,6 +59,15 @@ const Calendars = ({ events, showEventsApi }) => {
     console.log("i renderd because of refresh or start");
   }, []);
 
+  const openEventClick = (event) => {
+    setOpenModal(true);
+    if (event.id) {
+      ShowEventApi(event.id);
+    }
+
+    return;
+  };
+
   const handleClose = () => {
     setOpenModal(false);
     closeEvent();
@@ -66,9 +77,9 @@ const Calendars = ({ events, showEventsApi }) => {
     <div className="calendar">
       {/* <Modals
         open={openModal}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-      ></Modals> */}
+        handleOpen={openEventClick}
+        // handleClose={handleClose}
+      /> */}
       <Calendar
         localizer={localizer}
         startAccessor="start"

@@ -1,72 +1,114 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import * as yup from "yup";
+import { Controller, useForm, useFieldArray } from "react-hook-form";
+import post from "../Helpers/Services";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import axios from "axios";
+// import * as yup from "yup";
 import { addEventApi } from "../Helpers/Events";
 import "./AddEvents.scss";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 //schema to validate event inputs
-const schema = yup
-  .object({
-    title: yup.string().required("Can't Be Empty"),
-    start: yup.date().required("Please specify the time to start"),
-  })
-  .required();
+// const schema = yup
+//   .object({
+//     title: yup.string().required("Can't Be Empty"),
+//     start: yup.date().required("Please specify the time to start"),
+//   })
+//   .required();
 
 //Create appointment Endpoint
-const addUser = async (user) => {
-  return await axios.post("http://localhost:5000/data", user);
-};
+// const addUser = async (user) => {
+//   return await axios.post("http://localhost:5000/data", user);
+// };
 
-const initialValue = {
-  title: "",
-  start: "",
-  end: "",
-  description: "",
-};
+// const initialValue = {
+//   title: "",
+//   start: "",
+//   end: "",
+//   description: "",
+// };
 
-const AddEvents = ({ addEventApi, error }) => {
+const AddEvents = (input) => {
   // const location = useLocation();
-  const [rerender, setRerender] = useState(false);
-  const [dbError, setError] = useState(false);
+  // const [rerender, setRerender] = useState(false);
+  // const [dbError, setError] = useState(false);
 
-  const [info, setInfo] = useState(initialValue);
-  const { title, start, end, describe } = info;
+  const [info, setInfo] = React.useState();
+  const [isLoading, setIsLoading] = React.useState(false);
 
+  // const { title, start, end, describe } = info;
   const {
     register,
     handleSubmit,
-
-    formState: { errors },
+    reset,
     control,
-  } = useForm({
-    resolver: yupResolver(schema),
+    formState: { errors },
+  } = useForm();
+  // resolver: yupResolver(schema),
+
+  const title = useFieldArray({
+    control,
+    name: "title",
   });
 
-  const onValueChange = (e) => {
-    //  console.log(e);
-    // console.log(e.target.value);
-    setInfo({ ...info, [e.target.name]: e.target.value });
-    console.log(info);
-  };
+  const start = useFieldArray({
+    control,
+    name: "start",
+  });
+
+  const end = useFieldArray({
+    control,
+    name: "end",
+  });
+
+  const describe = useFieldArray({
+    control,
+    name: "describe",
+  });
+
+  // const onValueChange = (e) => {
+  //   //  console.log(e);
+  //   // console.log(e.target.value);
+  //   setInfo({ ...info, [e.target.name]: e.target.value });
+  //   console.log(info);
+  // };
 
   // Create appointment Endpoint
-  const onSubmit = async () => {
-    await addUser(info);
+  // const onSubmit = (input) => {
+  //   setIsLoading(true);
 
-    //redirect to display all appointments
-  };
+  //   post(input).then((res) => {
+  //     const { data } = res;
+  //     console.log(data);
+  //     if (data.success) {
+  //       reset();
+  //       //Notify the user
+  //       console.log("Appointment created successfully");
+  //     } else {
+  //       console.log("Appointment creation failed");
+  //     }
+  //     setIsLoading(false);
+  //   });
+  // };
 
-  useEffect(() => {
-    console.log(addEventApi);
-  }, [addEventApi]);
+  // e.preventDefault();
+
+  // let payload = {
+  //   title: title.value,
+  //   start: start.value,
+  //   end: end.value,
+  //   description: describe.value,
+  // };
+
+  // await addUser(payload);
+  // useEffect(() => {
+  //   console.log(addEventApi);
+  // }, [addEventApi]);
 
   return (
-    <form onSubmit={onSubmit()} className=" align-content-center m-5">
+    <form className=" align-content-center m-5">
       <div className="align-content-center m-5">
         <p>Add event details below</p>
       </div>
@@ -75,21 +117,22 @@ const AddEvents = ({ addEventApi, error }) => {
           Event Title
         </label>
         <input
-          {...register("title")}
           type="text"
           placeholder="title"
           className="form-control"
-          id="title"
+          name="title"
           aria-describedby="title"
+          ref={register()}
+          errors={errors}
         />
-        <p
+        {/* <p
           className={`error text-warning position-absolute ${
             errors.title ? "active" : ""
           }`}
         >
           {errors.title ? <i className="bi bi-info-circle me-2"></i> : ""}
           {errors.title?.message}
-        </p>
+        </p> */}
       </div>
 
       <div className="mb-4" style={{ zIndex: "100" }}>
@@ -110,27 +153,27 @@ const AddEvents = ({ addEventApi, error }) => {
               timeFormat="HH:mm"
               dateFormat="MMMM d, yyyy h:mm aa"
               className="form-control"
-              id="start"
+              name="start"
             />
           )}
         />
         {/* error handling */}
-        <p
+        {/* <p
           className={`error text-warning position-absolute ${
             errors.start ? "active" : ""
           }`}
         >
           {errors.start ? <i className=" bi bi-info-circle me-2"></i> : ""}
           {errors.start?.message}
-        </p>
-        <p
+        </p> */}
+        {/* <p
           className={`error text-warning position-absolute ${
             dbError.start ? "" : "d-none"
           }`}
         >
           {dbError.start ? <i className=" bi bi-info-circle me-2"></i> : ""}
           {dbError.start}
-        </p>
+        </p> */}
       </div>
 
       <div className="mb-4" style={{ zIndex: "100" }}>
@@ -151,18 +194,18 @@ const AddEvents = ({ addEventApi, error }) => {
               dateFormat="MMMM d, yyyy h:mm aa"
               showTimeSelect
               className="form-control"
-              id="end"
+              name="end"
             />
           )}
         />
-        <p
+        {/* <p
           className={`error text-warning position-absolute ${
             dbError.end ? "" : "d-none"
           }`}
         >
           {dbError.end ? <i className=" bi bi-info-circle me-2"></i> : ""}
           {dbError.end}
-        </p>
+        </p> */}
       </div>
 
       <div className="mb-4">
@@ -171,19 +214,15 @@ const AddEvents = ({ addEventApi, error }) => {
           <span className="text-danger small">(optional)</span>
         </label>
         <input
-          {...register("describe")}
+          ref={register}
           type="text"
           placeholder="describe your event"
           className="form-control"
-          id="describe"
+          name="describe"
           aria-describedby="describe"
         />
       </div>
-      <button
-        type="submit"
-        className="btn btn-success"
-        onClick={() => onSubmit()}
-      >
+      <button type="submit" className="btn btn-success" loading={isLoading}>
         Create Event
       </button>
     </form>

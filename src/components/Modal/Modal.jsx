@@ -2,11 +2,14 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Delete, closeEvent } from "../Helpers/Events";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { connect } from "react-redux";
 // import { closeEvent } from "../Helpers/close";
 
 const Modals = ({ open, handleClose, event, Delete, closeEvent, render }) => {
+  const navigate = useNavigate();
   const { title, describe, start, end, id } = event;
+
   const handleDelete = async () => {
     await Delete(event.id);
   };
@@ -16,7 +19,7 @@ const Modals = ({ open, handleClose, event, Delete, closeEvent, render }) => {
       <div>
         <Modal show={open} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title className="text-capitalize">{title}</Modal.Title>
+            <Modal.Title className="text-capitalize">{}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {describe ? (

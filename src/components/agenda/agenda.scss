@@ -1,0 +1,63 @@
+@import "~react-agenda/build/styles.css";
+@import "~react-datetime/css/react-datetime.css";
+
+.content-expanded {
+  padding: 54px 67px;
+
+  .control-buttons {
+    border: solid 2px;
+    border-radius: 7px;
+    border-color: #efeffb;
+    .button-control {
+      button {
+        display: block;
+        min-width: 115px;
+        font-weight: 400;
+        height: auto;
+        border: 2px solid var(--lightOrange);
+        border-radius: 40px;
+        padding: 10px 12px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        margin-right: 11px;
+        max-width: 125px;
+        text-align: center;
+      }
+    }
+  }
+  .agenda__table {
+    border: solid 2px;
+    border-radius: 7px;
+    border-color: #efeffb;
+
+    table {
+      tbody {
+        tr {
+          height: 36px;
+        }
+      }
+      .agenda-cell-item {
+        width: 236.571px;
+        margin-left: 45.7143px;
+        z-index: 5;
+        margin-top: 0px;
+        /* background: lightgray; */
+        height: 110px;
+        border-radius: 7px;
+        // .agenda-edit-event{
+        //     i
+        // }
+
+        .remove-item-icon {
+          height: 18px;
+          width: 18px;
+        }
+        .edit-item-icon {
+          height: 18px;
+          width: 18px;
+        }
+      }
+    }
+  }
+}
